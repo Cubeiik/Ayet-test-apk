@@ -1,6 +1,5 @@
 import 'package:ayet_apk/custom_offerwall_show.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ElevatedButton(
               onPressed: () {
                 final int platformId = iphone ? 1 : 0;
+
                 runAyet(platformId, '124523452');
               },
               child: const Text('AyetStudios'))),

@@ -174,14 +174,14 @@ Page resource error:
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Flutter WebView example'),
-      //   // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
-      //   actions: <Widget>[
-      //     NavigationControls(webViewController: _controller),
-      //     SampleMenu(webViewController: _controller),
-      //   ],
-      // ),
+      appBar: AppBar(
+        title: const Text('Flutter WebView example'),
+        // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
+        actions: <Widget>[
+          NavigationControls(webViewController: _controller),
+          SampleMenu(webViewController: _controller),
+        ],
+      ),
       body: SafeArea(child: WebViewWidget(controller: _controller)),
       // floatingActionButton: favoriteButton(),
     );

@@ -1,5 +1,8 @@
 import 'package:ayet_apk/custom_offerwall_show.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,8 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   void runAyet(int platform, String id) {
     Navigator.push(
       context,
@@ -42,6 +43,21 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  final Uri toLaunch = Uri(
+    scheme: 'https',
+    host: 'www.ayetstudios.com',
+    path: 'offers/web_offerwall/12563?external_identifier=1234',
+  );
+
+  void _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool iphone = Theme.of(context).platform == TargetPlatform.iOS;
@@ -51,13 +67,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: ElevatedButton(
+        child: Column(
+          children: [
+            ElevatedButton(
               onPressed: () {
                 final int platformId = iphone ? 1 : 0;
-
-                runAyet(platformId, '124523452');
+                runAyet(platformId, '1234');
               },
-              child: const Text('AyetStudios'))),
+              child: const Text('AyetStudios WEBVIEW'),
+            ),
+            ElevatedButton(
+              onPressed: () async => _launchInBrowser(toLaunch),
+              child: const Text('AyetStudios BROWSER'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
